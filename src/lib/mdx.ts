@@ -124,7 +124,14 @@ export function getMarkdownFile(slug: string): MarkdownFile | null {
 
 export function generateStaticParams(): Array<{ slug: string[] }> {
   const files = getAllMarkdownFiles();
-  return files.map((file) => ({
-    slug: file.slug.split('/'),
+  
+  // Ensure we have at least one param for static export
+  const params = files.map((file) => ({
+    slug: file.slug.split('/').filter(Boolean),
   }));
+  
+  // Add the root docs page (empty slug)
+  params.unshift({ slug: [] });
+  
+  return params;
 }
