@@ -1,5 +1,6 @@
 import { TreeViewSidebar } from '@/components/TreeViewSidebar';
 import { getFileTree } from '@/lib/mdx';
+import { Card } from '@/components/ui/card';
 
 export default function DocsLayout({
   children,
@@ -9,11 +10,15 @@ export default function DocsLayout({
   const fileTree = getFileTree();
 
   return (
-    <div className="flex h-screen bg-background">
+    <div className="flex h-screen w-screen bg-white overflow-hidden">
       <TreeViewSidebar fileTree={fileTree} />
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-6 py-8 lg:px-8">
-          {children}
+      <main className="flex-1 overflow-y-auto w-full">
+        <div className="w-full h-full px-2 py-2">
+          <Card className="shadow-sm h-full">
+            <div className="p-3 h-full overflow-y-auto">
+              {children}
+            </div>
+          </Card>
         </div>
       </main>
     </div>
